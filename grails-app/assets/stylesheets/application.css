@@ -1,0 +1,261 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS file within this directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the top of the
+* compiled file, but it's generally better to create a new file per style scope.
+*
+*= require bootstrap
+*= require mobile
+*= require_self
+*/
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Lobster|Muli');
+html, body {
+    background-color: #EBEBEB;
+}
+
+#topContainer {
+    position: relative;
+    display: block;
+    width: 100% !important;
+    height: 500px;
+    line-height: 500px;
+    text-align: center;
+    vertical-align: middle;
+    color: #FFF;
+    background: url('../images/background.jpg') 50% 50% no-repeat fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0 !important;
+}
+#bck {
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+#logo {
+    padding: 100px 200px;
+    margin: auto auto;
+    color: #fff;
+    font-size: 4vw;
+    font-family: 'Lobster', cursive;
+}
+#navContainer {
+    background-color: #fff;
+    -webkit-box-shadow: -1px 0px 9px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 0px 9px -1px rgba(0,0,0,0.75);
+    box-shadow: -1px 0px 9px -1px rgba(0,0,0,0.75);
+}
+#main {
+    margin-top: 40px;
+    margin-bottom: 100px;
+    background-color: #FFF;
+    -webkit-box-shadow: 0px 2px 9px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 9px -1px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 9px -1px rgba(0,0,0,0.75);
+}
+#bottom {
+    background-color: #2e3741;
+    height: 250px;
+}
+.jumbotron {
+    background-color: #105B63;
+    border-radius: 0 !important;
+    margin: 0;
+}
+.container {
+    padding: 0;
+}
+
+.navbar {
+    border: 0;
+    border-radius: 0;
+    background-color: #fff;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #2e3741;
+}
+
+
+/*
+*   INDEX
+*/
+
+.index-groupe-list {
+    width: 60%;
+    margin: 0 auto;
+    font-size: 30px;
+}
+.index-groupe-list > a:hover {
+    text-decoration: none;
+}
+
+.index-groupe-list > a > li {
+    height: 150px;
+    padding: 0;
+    margin: 5px;
+    font-family: 'Indie Flower', cursive;
+}
+.index-groupe-list > a > li:hover {
+    background-color: rgba(0,0,0,0.1);
+    text-decoration: none;
+}
+.index-groupe-list > a > li > img{
+    height: 100%;
+}
+/*
+*   GROUPES
+*/
+
+#create-groupe {
+    margin: 0 auto;
+    width: 50%;
+}
+
+#inputFileArea {
+    width: 100%;
+    height: 50px;
+    margin: 0 0 5px 0;
+    background-color: aquamarine;
+    color: #2e3741;
+
+    text-align: center;
+}
+#inputFileArea > span {
+    font-size: 1.5em;
+    line-height: 50px;
+    vertical-align: middle;
+}
+#inputFileArea:hover {
+    cursor: pointer;
+    background-color: #00b3ee;
+}
+#previewContainer {
+    width: 100%;
+    max-height: 200px;
+    border: 1px dashed #999999;
+    text-align: center;
+    color: #999999;
+}
+#previewContainer > span {
+    font-size: 3em;
+    line-height: 200px;
+    vertical-align: middle;
+}
+
+#previewImage {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 200px;
+}
+
+.save {
+    border: 2px solid #5cb85c;
+    height: 50px;
+    width: 100%;
+    float: right;
+    font-size: 1.5em;
+    color: #fff;
+    background-color: #5cb85c;
+    margin-top:20px;
+}
+.save:hover {
+    background-color: #fff;
+    color: #5cb85c;
+}
+.login {
+    border: 0;
+    height: 50px;
+    width: 100%;
+    font-size: 1.5em;
+    color: #fff;
+    background-color: #5cb85c;
+    margin-top: 20px;
+}
+.login:hover {
+    background-color: #3e8f3e;
+}
+/*
+** FORMS
+*/
+input.form-control {
+    border-radius: 0 !important;
+}
+form {
+    margin: 50px 0 100px 0;
+}
+.row {
+    margin: 15px;
+}
+.label {
+    font-size: 15px;
+    color: #000;
+    font-family: 'Montserrat', sans-serif;
+    float: right;
+}
+.page-header {
+    font-size: 2vw;
+    color: #1b6d85;
+    font-family: 'Josefin Sans', sans-serif;
+    text-align: center;
+}
+.form-control {
+    width: 100% !important;
+}
+
+/*
+**  INDEX
+*/
+.no-padding {
+    padding: 0 !important;
+}
+.no-margin {
+    margin: 0 !important;
+}
+.img-wrapper {
+    position:relative;
+    overflow: hidden;
+    height: 320px;
+}
+.img-wrapper a {
+    color: #2e3741;
+}
+.groupe-img {
+    position: relative;
+    width: 100%;
+}
+.img-description {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(80, 102, 102, 0.5);
+    line-height: 100%;
+    text-align: center;
+    opacity: 1;
+    color: #fff;
+
+}
+.img-description:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+    opacity: 1;
+    color: #2e3741;
+
+}
+.img-span {
+    font-size: 3vw;
+    font-family: 'Lobster', cursive
+}

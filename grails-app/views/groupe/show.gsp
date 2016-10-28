@@ -61,16 +61,37 @@
 					
 				</li>
 				</g:if>
-			
+
 				<g:if test="${groupeInstance?.groupes}">
-				<li class="fieldcontain">
-					<span id="groupes-label" class="property-label"><g:message code="groupe.groupes.label" default="Groupes" /></span>
-					
-						<g:each in="${groupeInstance.groupes}" var="g">
-						<span class="property-value" aria-labelledby="groupes-label"><g:link controller="groupe" action="show" id="${g.id}">${g?.encodeAsHTML()}</g:link></span>
+					<p class="fieldcontain">
+						<span id="groupes-label" class="property-label"><g:message code="groupe.groupes.label" default="Groupes" /></span>
+
+					<ul id="${groupeInstance.id}">
+						<g:set var="niveauAvant" value="0" />
+						<g:each in="${listSubGroupes}" var="mapPair">
+							<g:set var="groupe" value="${mapPair.getKey()}" />
+							<g:set var="niveauCurrent" value="${mapPair.getValue()}" />
+
+							<g:if test="${niveauAvant.toInteger() < niveauCurrent}">
+								<g:each in="${(1..(niveauCurrent - niveauAvant.toInteger()))}" var="i">
+									<li><ul>
+								</g:each>
+							</g:if>
+							<li><g:link controller="groupe" action="show" id="${groupe.id}">${groupe.nom}</g:link>
+								<ul id="groupe_${groupe.id}">
+									<g:each in="${groupe.activites}" var="a">
+										<li id="activite_${a.id}" ><g:link controller="activite" action="show" id="${a.id}">${a.nom}</g:link></li>
+									</g:each>
+								</ul>
+							</li>
+							<g:if test="${niveauAvant.toInteger() < niveauCurrent}">
+								<g:each in="${(1..(niveauCurrent - niveauAvant.toInteger()))}" var="i">
+									</ul></li>
+								</g:each>
+							</g:if>
 						</g:each>
-					
-				</li>
+					</ul>
+					</p>
 				</g:if>
 			
 				<g:if test="${groupeInstance?.parent}">

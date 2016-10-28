@@ -39,16 +39,24 @@
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: activiteInstance, field: 'groupes', 'error')} ">
-	<label for="groupes">
+	<g:hiddenField id="groupes" name="groupList" value="${listIdGroupes}" />
+	<label>
 		<g:message code="activite.groupes.label" default="Groupes" />
-		
 	</label>
-	<ul>
-		<g:each in="${listSuperGroupes}" var="groupeInstance">
-			<li>${fieldValue(bean: groupeInstance, field: "nom")}
-			</li>
-		</g:each>
-	</ul>
+	<g:each in="${listSuperGroupes}" var="superGroupe">
+		<label>${fieldValue(bean: superGroupe, field: "nom")}</label>
+		<g:set var="mapSubGroupes" value="${listGroupeHierarchy.get(superGroupe)}" />
+		<select class="superGroup" onchange="refreshGroupList()">
+			<option selected value> -- Faites un choix -- </option>
+			<g:each in="${mapSubGroupes}" var="subGroupe">
+				<g:set var="key" value="${subGroupe.getKey()}" />
+				<g:set var="niveau" value="${subGroupe.getValue()}" />
+				<option value=${key.id}>
+					<g:each in="${0..niveau}" var="i">&nbsp;&nbsp;&nbsp;</g:each>
+					${fieldValue(bean: key, field: "nom")}</option>
+			</g:each>
+		</select>
+	</g:each>
 
 </div>
 

@@ -29,4 +29,71 @@ class GroupeService {
         }
         return listeSuperGroupes
     }
+
+    def listSubGroupes(Groupe groupe, int level) {
+        def map = [:]
+
+        groupe.groupes.each {subGroupe ->
+            //map.put(subGroupe, new Tuple(subGroupe, level))
+            map.put(subGroupe, level)
+            if(!subGroupe.groupes.empty) {
+                map.putAll(listSubGroupes(subGroupe, level + 1))
+            }
+        }
+
+        return map
+    }
+
+    def updateActivitiesList(String listeActivites) {
+        // format : id_groupe1:id_act1,id_act2;id_groupe2:id_act1,id_act2,id_act3
+
+        println(listeActivites)
+        def listeActivitesParGroupe = listeActivites.split(';')
+        listeActivitesParGroupe.each {liste ->
+            def tuple = liste.split(':')
+            def idGroupe = tuple[0]
+            def groupe = Groupe.get(idGroupe)
+            def activites = tuple[1]
+
+            updateActiviteIndicesParGroupe(groupe, activites)
+        }
+    }
+
+    def updateActiviteIndicesParGroupe(Groupe groupe, String idsActivites) {
+        def listeFinale = []
+        def listeIds = idsActivites.split(',')
+
+        def activitesDuGroupe = []
+        listeIds.each {act ->
+            Activite a = Activite.get(act)
+            activitesDuGroupe.push(a)
+
+            groupe.activites.remove(a)
+            //groupe.save(flush: true, failOnError: true)
+
+            //def activite = groupe.activites.find { a -> a.id == Long.parseLong(act)  }
+            //listeFinale.push(activite)
+        }
+        //groupe.activites = listeFinale
+
+        activitesDuGroupe.each { activite ->
+            groupe.activites.add(activite)
+            //groupe.save(flush: true, failOnError: true)
+        }
+
+        groupe.save(flush:true, failOnError:true)
+    }
+
+    /*def buildListSubGroupes(Groupe groupe) {
+        def liste = []
+
+        groupe.groupes.each {subGroupe ->
+            liste.add(subGroupe)
+            if(!subGroupe.groupes.empty) {
+                liste.addAll(buildListSubGroupes(subGroupe))
+            }
+        }
+
+        return liste
+    }*/
 }

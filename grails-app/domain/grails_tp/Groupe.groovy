@@ -12,5 +12,10 @@ class Groupe {
 
     static constraints = {
         nom     nullable: false
+        photo   nullable: trueRandonnée
+    }
+
+    static mapping = {
+        groupes sort: 'id', order: 'asc'
     }
 }

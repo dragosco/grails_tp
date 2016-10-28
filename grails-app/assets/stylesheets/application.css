@@ -10,6 +10,7 @@
 *= require bootstrap
 *= require mobile
 *= require_self
+*= require dragAndDrop
 */
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Lobster|Muli');
 html, body {

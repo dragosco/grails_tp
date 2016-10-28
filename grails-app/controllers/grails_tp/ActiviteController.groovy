@@ -1,6 +1,6 @@
 package grails_tp
 
-
+import grails.plugin.springsecurity.SpringSecurityService
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -8,8 +8,11 @@ import org.springframework.security.access.annotation.Secured
 
 @Transactional(readOnly = true)
 class ActiviteController {
-
+    def grailsApplication
     def groupeService
+    def activiteService
+    SpringSecurityService springSecurityService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     @Secured('IS_AUTHENTICATED_FULLY')
@@ -26,23 +29,39 @@ class ActiviteController {
     @Secured('IS_AUTHENTICATED_FULLY')
     def create() {
         def listSuperGroupes = groupeService.listSuperGroupes()
-        respond new Activite(params), model:[listSuperGroupes:listSuperGroupes]
+        def listGroupeHierarchy = [:]
+        listSuperGroupes.each { superGroupe ->
+            listGroupeHierarchy.put(superGroupe, groupeService.listSubGroupes(superGroupe, 0))
+        }
+        respond new Activite(params), model:[listSuperGroupes:listSuperGroupes, listGroupeHierarchy:listGroupeHierarchy]
     }
 
     @Secured('IS_AUTHENTICATED_FULLY')
+    //@Secured(['ROLE_ADMIN', 'ROLE_MOD'])
     @Transactional
     def save(Activite activiteInstance) {
+        activiteInstance.auteur = springSecurityService.getCurrentUser()
+        activiteInstance.groupes = []
+
+        def listIds = params.groupList.split(',')
+        def idsGroupes = []
+        listIds.each {id ->
+            idsGroupes.add(id.toInteger())
+        }
+
         if (activiteInstance == null) {
             notFound()
             return
         }
 
-        if (activiteInstance.hasErrors()) {
+        /*if (activiteInstance.hasErrors()) {
             respond activiteInstance.errors, view:'create'
             return
-        }
+        }*/
 
-        activiteInstance.save flush:true
+        activiteService.createActivite(activiteInstance, idsGroupes)
+
+        //activiteInstance.save flush:true
 
         request.withFormat {
             form multipartForm {
@@ -55,12 +74,29 @@ class ActiviteController {
 
     @Secured(['ROLE_ADMIN', 'ROLE_MOD'])
     def edit(Activite activiteInstance) {
-        respond activiteInstance
+        def listSuperGroupes = groupeService.listSuperGroupes()
+        def listGroupeHierarchy = [:]
+        listSuperGroupes.each {superGroupe ->
+            listGroupeHierarchy.put(superGroupe, groupeService.listSubGroupes(superGroupe, 0))
+        }
+        def listIdGroupes = []
+        activiteInstance.groupes.each {g ->
+            listIdGroupes.add(g.id)
+        }
+        respond activiteInstance, model:[listSuperGroupes:listSuperGroupes, listGroupeHierarchy:listGroupeHierarchy, listIdGroupes: listIdGroupes]
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_MOD'])
     @Transactional
     def update(Activite activiteInstance) {
+        activiteInstance.groupes = []
+
+        def listIds = params.groupList.split(',')
+        def idsGroupes = []
+        listIds.each {id ->
+            idsGroupes.add(id.toInteger())
+        }
+
         if (activiteInstance == null) {
             notFound()
             return
@@ -71,7 +107,9 @@ class ActiviteController {
             return
         }
 
-        activiteInstance.save flush:true
+        activiteService.updateActivite(activiteInstance, idsGroupes)
+
+        //activiteInstance.save flush:true
 
         request.withFormat {
             form multipartForm {

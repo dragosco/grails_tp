@@ -7,6 +7,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class GroupeController {
     def grailsApplication
+    def groupeService
     SpringSecurityService springSecurityService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
@@ -19,7 +20,8 @@ class GroupeController {
 
     @Secured('IS_AUTHENTICATED_FULLY')
     def show(Groupe groupeInstance) {
-        respond groupeInstance
+        def listSubGroupes = groupeService.listSubGroupes(groupeInstance, 0)
+        render (view: "/groupe/show", model: [listSubGroupes:listSubGroupes, groupeInstance: groupeInstance])
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_MOD'])
@@ -71,7 +73,9 @@ class GroupeController {
 
     @Secured(['ROLE_ADMIN', 'ROLE_MOD'])
     def edit(Groupe groupeInstance) {
-        respond groupeInstance
+        def listSubGroupes = groupeService.listSubGroupes(groupeInstance, 0)
+        respond groupeInstance, model:[listSubGroupes:listSubGroupes]
+        //respond groupeInstance
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_MOD'])
@@ -84,7 +88,9 @@ class GroupeController {
             groupeInstance.parent = parent
         }
 
-        def file = request.getFile('image')
+        groupeService.updateActivitiesList(params.listeActivites)
+
+        /*def file = request.getFile('image')
         if (!file.empty) {
             File fileDest = new File(grailsApplication.config.images.groupes.path, file.getOriginalFilename())
             file.transferTo(fileDest)
@@ -92,7 +98,7 @@ class GroupeController {
         Photo photo = new Photo(nom:file.getOriginalFilename()).save(flush: true, failOnError: true)
 
         groupeInstance.photo = photo
-        groupeInstance.validate()
+        groupeInstance.validate()*/
 
 
         if (groupeInstance == null) {

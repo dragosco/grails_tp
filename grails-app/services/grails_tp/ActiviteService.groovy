@@ -15,4 +15,30 @@ class ActiviteService {
             groupe.save(flush: true, failOnError: true)
         }
     }
+
+    def createActivite(Activite activite, List<Integer> idsGroupes) {
+        activite.save(flush: true, failOnError: true)
+
+        idsGroupes.each { idGroupe ->
+            def groupe = Groupe.get(idGroupe)
+            groupe.activites.add(activite)
+            groupe.save(flush: true, failOnError: true)
+        }
+    }
+
+    def updateActivite(Activite activite, List<Integer> idsGroupes) {
+        activite.save(flush: true, failOnError: true)
+
+        def groupes = Groupe.list()
+        groupes.each {groupe ->
+            groupe.activites.remove(activite)
+            //groupe.save(flush: true, failOnError: true)
+        }
+
+        idsGroupes.each { idGroupe ->
+            def groupe = Groupe.get(idGroupe)
+            groupe.activites.add(activite)
+            groupe.save(flush: true, failOnError: true)
+        }
+    }
 }

@@ -67,10 +67,40 @@ class BootStrap {
             def ville        = groupeService.createGroupe("Ville", admin, 7, 1)
 
             def list = []
-            list.add(Integer.valueOf(1))
-            list.add(Integer.valueOf(2))
-            list.add(Integer.valueOf(3))
+            list.add(Integer.valueOf(8))
+            list.add(Integer.valueOf(10))
+            list.add(Integer.valueOf(15))
             def activite1 = activiteService.createActivite("activité1", "bla bl bla bla", 45, 52, op, list)
+
+            list = []
+            list.add(Integer.valueOf(7))
+            list.add(Integer.valueOf(10))
+            list.add(Integer.valueOf(15))
+            activiteService.createActivite("activité2", "bla bl bla bla", 45, 52, op, list)
+
+            list = []
+            list.add(Integer.valueOf(21))
+            list.add(Integer.valueOf(10))
+            list.add(Integer.valueOf(15))
+            activiteService.createActivite("activité3", "bla bl bla bla", 45, 52, op, list)
+
+            list = []
+            list.add(Integer.valueOf(21))
+            list.add(Integer.valueOf(10))
+            list.add(Integer.valueOf(15))
+            activiteService.createActivite("activité4", "bla bl bla bla", 45, 52, op, list)
+
+            list = []
+            list.add(Integer.valueOf(21))
+            list.add(Integer.valueOf(10))
+            list.add(Integer.valueOf(15))
+            activiteService.createActivite("activité5", "bla bl bla bla", 45, 52, op, list)
+
+            list = []
+            list.add(Integer.valueOf(21))
+            list.add(Integer.valueOf(10))
+            list.add(Integer.valueOf(15))
+            activiteService.createActivite("activité6", "bla bl bla bla", 45, 52, op, list)
 
             userService.grantRole(modop.id, roleMod.id)
         } catch(e) {

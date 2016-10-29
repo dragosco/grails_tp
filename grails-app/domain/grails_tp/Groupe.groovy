@@ -12,7 +12,7 @@ class Groupe {
 
     static constraints = {
         nom     nullable: false
-        photo   nullable: trueRandonnée
+        photo   nullable: true
     }
 
     static mapping = {

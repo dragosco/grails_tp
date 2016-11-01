@@ -5,6 +5,7 @@
 // You're free to add application-wide JavaScript to this file, but it's generally better 
 // to create separate JavaScript files as needed.
 //
+//= require googleMaps
 //= require jquery
 //= require bootstrap
 //= require_tree .
@@ -41,3 +42,4 @@ $( document ).ready(function () {
 
 	$(".img-description").css({'line-height': $(".img-wrapper").height() + "px"});
 });
+

@@ -25,6 +25,7 @@
 
 			</div>
 		</g:each>
+
 	</div>
 	</body>
 </html>

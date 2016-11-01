@@ -25,7 +25,7 @@
 		<g:message code="activite.lat.label" default="Lat" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field type="number" name="lat" value="${fieldValue(bean: activiteInstance, field: 'lat')}" required=""/>
+	<g:field id="lat" type="number" name="lat" value="${fieldValue(bean: activiteInstance, field: 'lat')}" required=""/>
 
 </div>
 
@@ -34,7 +34,7 @@
 		<g:message code="activite.lng.label" default="Lng" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field type="number" name="lng" value="${fieldValue(bean: activiteInstance, field: 'lng')}" required=""/>
+	<g:field id="lng" type="number" name="lng" value="${fieldValue(bean: activiteInstance, field: 'lng')}" required=""/>
 
 </div>
 

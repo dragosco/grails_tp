@@ -33,6 +33,9 @@
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 				</fieldset>
 			</g:form>
+
+			<div id="map" style="width:100%;height:500px"></div>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL7CpoZYB65LA0bjOghxwIN98SaqXFwQA&callback=myMap"></script>
 		</div>
 	</body>
 </html>

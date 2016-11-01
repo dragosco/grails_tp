@@ -8,25 +8,9 @@
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
-
-		<div class="row no-margin">
-			<div class="col-md-6 no-padding">
-				<img class="super-groupe-img" src=${grailsApplication.config.images.groupes.url}${groupeInstance.photo.nom}>
-			</div>
-
-			<div class="col-md-6 no-padding">
-				<g:each in="${groupeInstance.groupes}" var="g">
-					<div class="row no-margin img-wrapper">
-						<g:link controller="groupe" action="show" id="${g.id}"><img class="groupe-img" src=${grailsApplication.config.images.groupes.url}${g.photo.nom}></g:link>
-						<div class="img-description">
-							<span class="img-span">${g.nom}</span>
-						</div>
-					</div>
-				</g:each>
-
-			</div>
-		</div>
 		<div id="show-groupe" class="content scaffold-show" role="main">
+			<div id="map_activites" style="width:100%; height:400px;"></div>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL7CpoZYB65LA0bjOghxwIN98SaqXFwQA&callback=mapGroupe"></script>
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
@@ -80,7 +64,11 @@
 							<li><g:link controller="groupe" action="show" id="${groupe.id}">${groupe.nom}</g:link>
 								<ul id="groupe_${groupe.id}">
 									<g:each in="${groupe.activites}" var="a">
-										<li id="activite_${a.id}" ><g:link controller="activite" action="show" id="${a.id}">${a.nom}</g:link></li>
+										<li class="activiteListItem" id="activite_${a.id}" ><g:link controller="activite" action="show" id="${a.id}">${a.nom}</g:link>
+											<input class="latInput" type="hidden" value="${a.lat}"/>
+											<input class="lngInput" type="hidden" value="${a.lng}"/>
+										</li>
+
 									</g:each>
 								</ul>
 							</li>

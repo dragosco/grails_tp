@@ -63,6 +63,8 @@ class GroupeService {
         def listeFinale = []
         def listeIds = idsActivites.split(',')
 
+        //groupe.activites.removeAll();
+
         def activitesDuGroupe = []
         listeIds.each {act ->
             Activite a = Activite.get(act)

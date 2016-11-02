@@ -3,12 +3,25 @@
  */
 refreshActivityList = function () {
     $("#listeActivites").removeAttr('value');
-    var groupes = [];
+    var activitesParGroupes = '';
 
-    $(".superGroup").each(function (index, element) {
-        groupes.push(element[element.selectedIndex].value);
+    $(".groupeElement").each(function (index, element) {
+        var lis = element.getElementsByClassName("activiteElement");
+        if(lis.length > 0) {
+            activitesParGroupes += element.id + ':';
+
+            for (var i = 0; i < lis.length; i++) {
+                if(i == lis.length - 1) {
+                    activitesParGroupes += lis[i].id;
+                } else {
+                    activitesParGroupes += lis[i].id + ',';
+                }
+            }
+            activitesParGroupes += ';';
+        }
     });
 
+    //alert(activitesParGroupes);
 
-    $("#groupes").attr("value", groupes);
+    $("#listeActivites").attr("value", activitesParGroupes);
 }

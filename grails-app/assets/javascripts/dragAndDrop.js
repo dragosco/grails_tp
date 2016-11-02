@@ -1826,6 +1826,19 @@ $(function  () {
         distance: 10
     });
 });
+
+$(function  () {
+    var group = $("ol.groupeElement").sortable({
+        group: 'groupeElement',
+        onDrop: function ($item, container, _super) {
+            refreshActivityList();
+            _super($item, container);
+        },
+        tolerance: 6,
+        distance: 10
+    });
+});
+
 $(function  () {
     $("ol.nav").sortable({
         group: 'nav',

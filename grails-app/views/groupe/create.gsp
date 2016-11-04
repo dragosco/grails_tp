@@ -8,7 +8,11 @@
 	<body>
 
 		<div id="create-groupe" class="content scaffold-create" role="main">
-			<h1>Créer un nouveau groupe</h1>
+			<div class="row">
+				<div class="page-header col-md-offset-3 col-md-6">
+					CREER UN NOUVEAU GROUPE
+				</div>
+			</div>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -25,7 +29,12 @@
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="Valider" />
+					<div class="row">
+						<div class="col-md-4 col-md-offset-4">
+							<g:submitButton name="create" class="save" value="Valider" />
+						</div>
+					</div>
+
 				</fieldset>
 			</g:uploadForm>
 		</div>

@@ -6,15 +6,12 @@
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#create-activite" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
 		<div id="create-activite" class="content scaffold-create" role="main">
-			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
+			<div class="row">
+				<div class="page-header col-md-offset-3 col-md-6">
+					CREER UNE NOUVELLE ACTIVITE
+				</div>
+			</div>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -30,12 +27,16 @@
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">
+							<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Valider')}" />
+						</div>
+					</div>
+
 				</fieldset>
 			</g:form>
 
-			<div id="map" style="width:100%;height:500px"></div>
-			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL7CpoZYB65LA0bjOghxwIN98SaqXFwQA&callback=myMap"></script>
+
 		</div>
 	</body>
 </html>

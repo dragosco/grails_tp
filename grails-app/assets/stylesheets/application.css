@@ -116,16 +116,12 @@ html, body {
 *   GROUPES
 */
 
-#create-groupe {
-    margin: 0 auto;
-    width: 50%;
-}
 
 #inputFileArea {
     width: 100%;
     height: 50px;
     margin: 0 0 5px 0;
-    background-color: aquamarine;
+    background-color: #999999;
     color: #2e3741;
 
     text-align: center;
@@ -137,7 +133,8 @@ html, body {
 }
 #inputFileArea:hover {
     cursor: pointer;
-    background-color: #00b3ee;
+    color: #fff;
+    background-color: #2e3741;
 }
 #previewContainer {
     width: 100%;
@@ -189,6 +186,9 @@ html, body {
 ** FORMS
 */
 input.form-control {
+    border-radius: 0 !important;
+}
+select.form-control {
     border-radius: 0 !important;
 }
 form {
@@ -259,4 +259,73 @@ form {
 .img-span {
     font-size: 3vw;
     font-family: 'Lobster', cursive
+}
+
+.delete-btn {
+    text-decoration: none;
+    width: 100%;
+    height: 50px;
+    background-color: #d43f3a;
+    color: #fff;
+    border: 0;
+}
+.delete-btn:hover {
+    border: 2px solid #d43f3a;
+    background-color: #fff;
+    color: #d43f3a;
+}
+.edit-btn {
+    display: block;
+    text-decoration: none !important;
+    width: 100%;
+    height: 50px;
+    padding-top:15px;
+    text-align: center;
+    background-color: #1b6d85;
+    color: #fff;
+    border: 0;
+}
+.edit-btn:hover {
+    border: 2px solid #1b6d85;
+    background-color: #fff;
+    color: #1b6d85;
+}
+
+.listeSuperGroupes {
+    list-style-type: none;
+    font-size: 30px;
+    font-family: 'Lobster', cursive;
+
+}
+.listeSuperGroupes a {
+    text-decoration: none;
+    color: #2e3741;
+    padding: 5px;
+    margin: 5px;
+}
+.listeSuperGroupes a:hover {
+    color: #1b6d85;
+}
+.listeGroupes {
+    list-style-type: none;
+    font-size: 15px;
+    font-family: 'Lobster', cursive;
+}
+
+.listeGroupes a {
+    text-decoration: none;
+    color: #8c8c8c;
+}
+.listeGroupes a:hover {
+    color: #3c3c3c;
+}
+.listeActivites {
+    list-style-type: none;
+    color: #2e3741;
+    font-size: 20px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+.listeActivites a {
+    text-decoration: none;
+    color: #3e8f3e;
 }

@@ -49,18 +49,44 @@ function mapGroupe() {
 
     var map = new google.maps.Map(mapCanvas, mapOptions);
 
-    document.getElementsByClassName("activiteListItem").forEach(function (item) {
-        console.log("coucou");
-        var marker = new google.maps.Marker({
-            position: new google.maps.LatLng($(this).find(".latInput").val(), $(this).find(".lngInput").val()),
-            map: map
-        });
+    $(document).ready(function(){
+        $(".activiteListItem").each(function () {
+            console.log($(this).find(".latInput").val() +  "   " + $(this).find(".lngInput").val());
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng($(this).find(".latInput").val(), $(this).find(".lngInput").val()),
+                map: map
+            });
 
-        var infowindow = new google.maps.InfoWindow({
-            content: $(this).html()
-        });
+            var infowindow = new google.maps.InfoWindow({
+                content: $(this).html()
+            });
 
-        infowindow.open(map,marker);
+            infowindow.open(map,marker);
+        });
     });
+}
+
+function mapActivite() {
+    var nice = new google.maps.LatLng(43.7, 7.25);
+    var mapCanvas = document.getElementById("map_activite_unique");
+    var mapOptions = {
+        center: nice,
+        zoom: 10
+    };
+
+    var map = new google.maps.Map(mapCanvas, mapOptions);
+
+    console.log(document.getElementsByClassName("latActivite")[0].value + document.getElementsByClassName("lngActivite")[0].value);
+    var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(document.getElementsByClassName("latActivite")[0].value, document.getElementsByClassName("latActivite")[0].value),
+        map: map
+    });
+
+    var infowindow = new google.maps.InfoWindow({
+        content: $("#nomActiviteDiv").html()
+    });
+
+    infowindow.open(map,marker);
+
 }
 

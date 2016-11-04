@@ -8,7 +8,6 @@
 	</head>
 	<body>
 		<div id="edit-user" class="content scaffold-edit" role="main">
-			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -24,72 +23,100 @@
 
 				<sec:ifNotGranted roles="ROLE_ADMIN">
 					<g:if test="${sec.username() == userInstance?.username}">
-						<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'username', 'error')} required">
-							<label for="username">
-								<g:message code="user.username.label" default="Username" />
-								<span class="required-indicator">*</span>
-							</label>
-							<g:textField name="username" required="" value="${userInstance?.username}"/>
 
+						<div class="row">
+							<div class="page-header col-md-offset-3 col-md-6">
+								<span>MODE EDITION</span>
+							</div>
 						</div>
-
-						<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required">
-							<label for="password">
-								<g:message code="user.password.label" default="Password" />
-								<span class="required-indicator">*</span>
-							</label>
-							<g:textField name="password" required="" value="${userInstance?.password}"/>
-
+						<div class="row">
+							<div class="col-md-2 col-md-offset-4">
+								<span class="label">Changer votre pseudo</span>
+							</div>
+							<div class="col-md-2">
+								<g:textField class="form-control" name="username" required="" value="${userInstance?.username}"/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2 col-md-offset-4">
+								<span class="label">Changer votre mot de passe</span>
+							</div>
+							<div class="col-md-2">
+								<g:passwordField class="form-control" name="password" placeholder="Ancien" required="" value=""/>
+								<br>
+								<g:passwordField class="form-control" name="password" placeholder="Nouveau" required="" value=""/>
+								<br>
+								<g:passwordField class="form-control" name="password" placeholder="Confirmer" required="" value=""/>
+							</div>
 						</div>
 					</g:if>
 				</sec:ifNotGranted>
 				<sec:ifAllGranted roles='ROLE_ADMIN'>
-					<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'username', 'error')} required">
-						<label for="username">
-							<g:message code="user.username.label" default="Username" />
-							<span class="required-indicator">*</span>
-						</label>
-						<g:textField name="username" required="" value="${userInstance?.username}"/>
 
+					<div class="row">
+						<div class="page-header col-md-offset-3 col-md-6">
+							<span>EDITER : </span><span style="color:red;">${userInstance?.username}</span>
+						</div>
 					</div>
-					<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountExpired', 'error')} ">
-						<label for="accountExpired">
-							<g:message code="user.accountExpired.label" default="Account Expired" />
-
-						</label>
-						<g:checkBox name="accountExpired" value="${userInstance?.accountExpired}" />
-
+					<div class="row">
+						<div class="col-md-2 col-md-offset-4">
+							<span class="label">Pseudo</span>
+						</div>
+						<div class="col-md-2">
+							<g:textField class="form-control" name="username" required="" value="${userInstance?.username}"/>
+						</div>
 					</div>
 
-					<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountLocked', 'error')} ">
-						<label for="accountLocked">
-							<g:message code="user.accountLocked.label" default="Account Locked" />
 
-						</label>
-						<g:checkBox name="accountLocked" value="${userInstance?.accountLocked}" />
 
+					<div class="row">
+						<div class="col-md-2 col-md-offset-4">
+							<span class="label">Compte expiré</span>
+						</div>
+						<div class="col-md-2">
+							<g:checkBox name="accountExpired" value="${userInstance?.accountExpired}" />
+						</div>
 					</div>
 
-					<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'enabled', 'error')} ">
-						<label for="enabled">
-							<g:message code="user.enabled.label" default="Enabled" />
 
-						</label>
-						<g:checkBox name="enabled" value="${userInstance?.enabled}" />
-
+					<div class="row">
+						<div class="col-md-2 col-md-offset-4">
+							<span class="label">Compte bloqué</span>
+						</div>
+						<div class="col-md-2">
+							<g:checkBox name="accountLocked" value="${userInstance?.accountLocked}" />
+						</div>
 					</div>
 
-					<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'passwordExpired', 'error')} ">
-						<label for="passwordExpired">
-							<g:message code="user.passwordExpired.label" default="Password Expired" />
 
-						</label>
-						<g:checkBox name="passwordExpired" value="${userInstance?.passwordExpired}" />
-
+					<div class="row">
+						<div class="col-md-2 col-md-offset-4">
+							<span class="label">Fonctionnel</span>
+						</div>
+						<div class="col-md-2">
+							<g:checkBox name="enabled" value="${userInstance?.enabled}" />
+						</div>
 					</div>
+
+
+					<div class="row">
+						<div class="col-md-2 col-md-offset-4">
+							<span class="label">Mot de passe expiré</span>
+						</div>
+						<div class="col-md-2">
+							<g:checkBox name="passwordExpired" value="${userInstance?.passwordExpired}" />
+						</div>
+					</div>
+
+
 				</sec:ifAllGranted>
 				<fieldset class="buttons">
-					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+					<div class="row">
+						<div class="col-md-offset-4 col-md-4">
+							<g:actionSubmit class="save" action="update" value="Mettre à jour" />
+						</div>
+					</div>
+
 				</fieldset>
 			</g:form>
 		</div>

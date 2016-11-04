@@ -40,7 +40,14 @@
                         <li><a href="${createLink(uri: '/')}"><span class="glyphicon glyphicon-home"></span></a></li>
                         <li><a href="${createLink(uri: '/activite/create/')}">NOUVELLE ACTIVITE</a></li>
                         <sec:ifAnyGranted roles='ROLE_ADMIN, ROLE_MOD'>
-                            <li><a href="${createLink(uri: '/groupe/create/')}">NOUVEAU GROUPE</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">GROUPES<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="${createLink(uri: '/groupe/create/')}">Nouveau groupe</a></li>
+                                    <li><a href="${createLink(uri: '/groupe/index/')}">Gestion groupes</a></li>
+                                </ul>
+                            </li>
+
                         </sec:ifAnyGranted>
 
                         <sec:ifAllGranted roles='ROLE_ADMIN'>

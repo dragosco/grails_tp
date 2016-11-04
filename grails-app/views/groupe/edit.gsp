@@ -8,10 +8,6 @@
 	</head>
 	<body>
 		<div id="edit-groupe" class="content scaffold-edit" role="main">
-			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
 			<g:hasErrors bean="${groupeInstance}">
 			<ul class="errors" role="alert">
 				<g:eachError bean="${groupeInstance}" var="error">
@@ -25,7 +21,12 @@
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
-					<g:submitButton name="update" class="save" value="${message(code: 'default.button.create.label', default: 'Update')}" />
+					<div class="row">
+						<div class="col-md-4 col-md-offset-4">
+							<g:submitButton name="update" class="save" value="Mettre à jour" />
+						</div>
+					</div>
+
 				</fieldset>
 			</g:uploadForm>
 		</div>

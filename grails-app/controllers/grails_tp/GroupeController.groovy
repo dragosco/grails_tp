@@ -55,10 +55,10 @@ class GroupeController {
             return
         }
 
-        if (groupeInstance.hasErrors()) {
+        /*if (groupeInstance.hasErrors()) {
             respond groupeInstance.errors, view:'create'
             return
-        }
+        }*/
 
         groupeInstance.save flush:true
 

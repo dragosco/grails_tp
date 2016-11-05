@@ -22,9 +22,19 @@
 				</div>
 				<div class="col-md-3">
 
-
-
+					<g:if test="${groupeInstance?.activites}">
+						<ul>
+							<g:each in="${groupeInstance.activites}" var="a">
+								<li id="${a.id}" class="activiteListItem">
+									<g:link  style="text-decoration: none;color: #3e8f3e; font-size: 15px; font-family: 'Josefin Sans', sans-serif;" controller="activite" action="show" id="${a.id}">${a.nom}</g:link>
+									<input class="latInput" type="hidden" value="${a.lat}"/>
+									<input class="lngInput" type="hidden" value="${a.lng}"/>
+								</li>
+							</g:each>
+						</ul>
+					</g:if>
 					<g:if test="${groupeInstance?.groupes}">
+
 						<ul class="listeSuperGroupes" id="${groupeInstance.id}">
 							<g:set var="niveauAvant" value="0" />
 							<g:each in="${listSubGroupes}" var="mapPair">

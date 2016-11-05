@@ -29,7 +29,7 @@
 						<input class="latActivite" type="hidden" value="${activiteInstance?.lat}" />
 						<input class="lngActivite" type="hidden" value="${activiteInstance?.lng}" />
 
-						${activiteInstance?.auteur}
+						${activiteInstance?.auteur.username}
 
 						<g:each in="${activiteInstance.groupes}" var="g">
 							<ul class="list-inline">

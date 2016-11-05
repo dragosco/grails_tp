@@ -7,7 +7,7 @@ refreshActivityList = function () {
 
     $(".groupeElement").each(function (index, element) {
         var lis = element.getElementsByClassName("activiteElement");
-        if(lis.length > 0) {
+        //if(lis.length > 0) {
             activitesParGroupes += element.id + ':';
 
             for (var i = 0; i < lis.length; i++) {
@@ -18,7 +18,7 @@ refreshActivityList = function () {
                 }
             }
             activitesParGroupes += ';';
-        }
+        //}
     });
 
     //alert(activitesParGroupes);

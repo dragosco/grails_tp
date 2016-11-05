@@ -53,7 +53,11 @@ class GroupeService {
             def tuple = liste.split(':')
             def idGroupe = tuple[0]
             def groupe = Groupe.get(idGroupe)
-            def activites = tuple[1]
+            def activites = ""
+
+            if(tuple.length > 1) {
+                activites = tuple[1]
+            }
 
             updateActiviteIndicesParGroupe(groupe, activites)
         }
@@ -61,16 +65,24 @@ class GroupeService {
 
     def updateActiviteIndicesParGroupe(Groupe groupe, String idsActivites) {
         def listeFinale = []
-        def listeIds = idsActivites.split(',')
+        def listeIds = []
+        if(!idsActivites.isEmpty()) {
+            listeIds = idsActivites.split(',')
+        }
 
-        //groupe.activites.removeAll();
+        def toutesActivitesDuGroupe = groupe.activites;
+        groupe.activites.removeAll(toutesActivitesDuGroupe);
+
+        /*groupe.activites.each {a ->
+            groupe.activites.remove(a)
+        }*/
 
         def activitesDuGroupe = []
         listeIds.each {act ->
             Activite a = Activite.get(act)
             activitesDuGroupe.push(a)
 
-            groupe.activites.remove(a)
+            //groupe.activites.remove(a)
             //groupe.save(flush: true, failOnError: true)
 
             //def activite = groupe.activites.find { a -> a.id == Long.parseLong(act)  }

@@ -60,11 +60,6 @@
 				</div>
 
 			</div>
-
-
-
-
-
 			<sec:ifAnyGranted roles='ROLE_ADMIN, ROLE_MOD'>
 				<g:form url="[resource:groupeInstance, action:'delete']" method="DELETE">
 					<fieldset class="buttons">

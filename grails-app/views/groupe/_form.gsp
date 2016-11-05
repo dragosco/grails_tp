@@ -42,14 +42,14 @@
 	<div class="col-md-4 col-md-offset-4">
 
 		<g:hiddenField id="listeActivites" name="listeActivites" value="21:3,5,4,6" />
-		<g:if test="${groupeInstance.activites != null && !groupeInstance.activites.isEmpty()}">
+		<!--<g:if test="${groupeInstance.activites != null && !groupeInstance.activites.isEmpty()}">-->
 
 			<ol id="${groupeInstance.id}" class="default vertical groupeElement">
 				<g:each in="${groupeInstance.activites}" var="a">
-					<li id="activite_${a.id}"><g:link controller="activite" action="show" id="${a.id}">${a.nom}</g:link></li>
+					<li id="${a.id}" class="activiteElement"><g:link controller="activite" action="show" id="${a.id}">${a.nom}</g:link></li>
 				</g:each>
 			</ol>
-		</g:if>
+		<!--</g:if>-->
 
 		<g:if test="${listSubGroupes != null && !listSubGroupes.isEmpty()}">
 			Changer l'ordre de l'affichage des activités :
@@ -67,7 +67,7 @@
 					<li><g:link controller="groupe" action="show" id="${groupe.id}">${groupe.nom}</g:link>
 						<ol id="${groupe.id}" class="default vertical groupeElement">
 							<g:each in="${groupe.activites}" var="a">
-								<li id="activite_${a.id}" ><g:link controller="activite" action="show" id="${a.id}">${a.nom}</g:link></li>
+								<li id="${a.id}" class="activiteElement"><g:link controller="activite" action="show" id="${a.id}">${a.nom}</g:link></li>
 							</g:each>
 						</ol>
 					</li>

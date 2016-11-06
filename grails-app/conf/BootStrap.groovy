@@ -102,6 +102,43 @@ class BootStrap {
             list.add(Integer.valueOf(15))
             def activite6 = activiteService.createActivite("activité6", "bla bl bla bla", 43.76117633310127, 7.406330108642578, op, list)
             println(activite6);
+            list = []
+            list.add(Integer.valueOf(21))
+            list.add(Integer.valueOf(10))
+            list.add(Integer.valueOf(15))
+            def activite7 = activiteService.createActivite("activité7", "bla bl bla bla", 43.76117633310127, 7.406330108642578, op, list)
+            println(activite7);
+            list = []
+            list.add(Integer.valueOf(21))
+            list.add(Integer.valueOf(9))
+            list.add(Integer.valueOf(15))
+            def activite8 = activiteService.createActivite("activité8", "bla bl bla bla", 43.76117633310127, 7.406330108642578, op, list)
+            println(activite8);
+            list = []
+            list.add(Integer.valueOf(21))
+            list.add(Integer.valueOf(9))
+            list.add(Integer.valueOf(15))
+            def activite9 = activiteService.createActivite("activité9", "bla bl bla bla", 43.76117633310127, 7.406330108642578, op, list)
+            println(activite9);
+            list = []
+            list.add(Integer.valueOf(21))
+            list.add(Integer.valueOf(9))
+            list.add(Integer.valueOf(15))
+            def activite10 = activiteService.createActivite("activité10", "bla bl bla bla", 43.76117633310127, 7.406330108642578, op, list)
+            println(activite10);
+            list = []
+            list.add(Integer.valueOf(21))
+            list.add(Integer.valueOf(9))
+            list.add(Integer.valueOf(15))
+            def activite11 = activiteService.createActivite("activité11", "bla bl bla bla", 43.76117633310127, 7.406330108642578, op, list)
+            println(activite11);
+            list = []
+            list.add(Integer.valueOf(21))
+            list.add(Integer.valueOf(9))
+            list.add(Integer.valueOf(15))
+            def activite12 = activiteService.createActivite("activité12", "bla bl bla bla", 43.76117633310127, 7.406330108642578, op, list)
+            println(activite12);
+
             userService.grantRole(modop.id, roleMod.id)
         } catch(e) {
             println e

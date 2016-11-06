@@ -8,6 +8,11 @@
 	</head>
 	<body>
 		<div id="edit-groupe" class="content scaffold-edit" role="main">
+			<div class="row">
+				<div class="page-header col-md-offset-3 col-md-6">
+					${groupeInstance?.nom.toUpperCase()}
+				</div>
+			</div>
 			<g:hasErrors bean="${groupeInstance}">
 			<ul class="errors" role="alert">
 				<g:eachError bean="${groupeInstance}" var="error">

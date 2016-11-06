@@ -42,21 +42,22 @@
 				</div>
 			</div>
 
-
-			<g:form url="[resource:activiteInstance, action:'delete']" method="DELETE">
-				<div class="row">
-					<div class="col-md-2 col-md-offset-4">
-						<g:link class="edit-btn" action="edit" resource="${activiteInstance}"><g:message code="Editer" default="Edit" /></g:link>
+			<sec:ifAnyGranted roles='ROLE_ADMIN, ROLE_MOD'>
+				<g:form url="[resource:activiteInstance, action:'delete']" method="DELETE">
+					<div class="row">
+						<div class="col-md-2 col-md-offset-4">
+							<g:link class="edit-btn" action="edit" resource="${activiteInstance}"><g:message code="Editer" default="Edit" /></g:link>
+						</div>
+						<div class="col-md-2">
+							<g:actionSubmit class="delete-btn" action="delete" value="Supprimer" onclick="return confirm('En êtes-vous certain ?');" />
+						</div>
 					</div>
-					<div class="col-md-2">
-						<g:actionSubmit class="delete-btn" action="delete" value="Supprimer" onclick="return confirm('En êtes-vous certain ?');" />
-					</div>
-				</div>
-				<fieldset class="buttons">
+					<fieldset class="buttons">
 
 
-				</fieldset>
-			</g:form>
+					</fieldset>
+				</g:form>
+			</sec:ifAnyGranted>
 		</div>
 	</body>
 </html>

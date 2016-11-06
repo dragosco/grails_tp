@@ -45,8 +45,11 @@ class ActiviteController {
 
         def listIds = params.groupList.split(',')
         def idsGroupes = []
-        listIds.each {id ->
-            idsGroupes.add(id.toInteger())
+
+        listIds.each { id ->
+            if(id) {
+                idsGroupes.add(id.toInteger())
+            }
         }
 
         if (activiteInstance == null) {
@@ -83,6 +86,12 @@ class ActiviteController {
         activiteInstance.groupes.each {g ->
             listIdGroupes.add(g.id)
         }
+
+        if(!listIdGroupes.isEmpty()) {
+            def ids = listIdGroupes.toString()
+            listIdGroupes = ids.substring(1,ids.length()-1)
+        }
+
         respond activiteInstance, model:[listSuperGroupes:listSuperGroupes, listGroupeHierarchy:listGroupeHierarchy, listIdGroupes: listIdGroupes]
     }
 
@@ -129,7 +138,7 @@ class ActiviteController {
             return
         }
 
-        activiteInstance.delete flush:true
+        activiteService.deleteActivite(activiteInstance)
 
         request.withFormat {
             form multipartForm {

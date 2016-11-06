@@ -1,6 +1,6 @@
 package grails_tp
 
-
+import grails.plugin.springsecurity.SpringSecurityService
 import org.springframework.security.access.annotation.Secured
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -9,11 +9,34 @@ import grails.transaction.Transactional
 class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    SpringSecurityService springSecurityService
 
-    @Secured('ROLE_ADMIN')
+    @Secured('IS_AUTHENTICATED_FULLY')
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond User.list(params), model:[userInstanceCount: User.count()]
+
+        def currentUser = springSecurityService.getCurrentUser()
+        def roles = currentUser.getAuthorities()
+        def roleCurrentUser = roles.getAt(0)
+        if(roleCurrentUser.authority.equals("ROLE_ADMIN")) {
+            respond User.list(params), model:[userInstanceCount: User.count()]
+        } else {
+            //def users = User.findAll("from User as u where u. = :mod" [mod: AuthorityEnum.MOD])
+            def usersTemp = User.list(params)
+            def users = []
+
+            usersTemp.each {u ->
+                println(u.username)
+                if(u.authorities.getAt(0).authority.equals("ROLE_OP") || (u.authorities.getAt(0).authority.equals("ROLE_MOD") && u.id == currentUser.id))
+                {
+                    users.push(u)
+                }
+            }
+
+            respond users, model:[userInstanceCount: users.size()]
+        }
+        //SecurityContextHolderAwareRequestWrapper.isUserInRole(AuthorityEnum.MOD)
+
     }
 
     @Secured('IS_AUTHENTICATED_FULLY')

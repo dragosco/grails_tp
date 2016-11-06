@@ -131,7 +131,7 @@ class GroupeController {
             return
         }
 
-        groupeInstance.delete flush:true
+        groupeService.deleteGroupe(groupeInstance)
 
         request.withFormat {
             form multipartForm {

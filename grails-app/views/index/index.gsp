@@ -14,7 +14,7 @@
 			<div class="col-md-6 no-padding">
 
 					<div class="row no-margin img-wrapper">
-						<img class="groupe-img" src=${grailsApplication.config.images.groupes.url}${g.photo.nom}>
+						<img class="groupe-img" src=${grailsApplication.config.images.groupes.url}${g.photo?.nom}>
 						<g:link controller="groupe" action="show" id="${g.id}">
 							<div class="img-description">
 								<span class="img-span">${g.nom}</span>

@@ -29,7 +29,7 @@
 				<fieldset class="buttons">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3">
-							<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Valider')}" />
+							<g:submitButton name="create" class="save" value="Valider" />
 						</div>
 					</div>
 

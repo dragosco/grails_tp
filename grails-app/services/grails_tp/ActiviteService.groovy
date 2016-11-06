@@ -41,4 +41,13 @@ class ActiviteService {
             groupe.save(flush: true, failOnError: true)
         }
     }
+
+    def deleteActivite(Activite activite) {
+        activite.groupes.each {g ->
+            g.activites.remove(activite)
+            g.save(flush: true, failOnError: true)
+        }
+
+        activite.delete(flush:true,failOnError: true)
+    }
 }

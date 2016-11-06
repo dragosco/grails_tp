@@ -4,7 +4,7 @@
 $(document).ready(function () {
     var groupList = $("#groupes").attr('value');
     if(groupList && !groupList.empty){
-        var groupesIds = groupList.substring(1,groupList.length-1).split(',').map(function(item) {
+        var groupesIds = groupList.split(',').map(function(item) { //.substring(1,groupList.length-1)
             return item.trim();
         });
         /*var groupesIds = $.map($.makeArray(groupList), function (g) {

@@ -98,6 +98,42 @@ class GroupeService {
         groupe.save(flush:true, failOnError:true)
     }
 
+    def deleteGroupe(Groupe groupe) {
+        // supprimer sous-groupes
+        def listeChildren = Groupe.findAll("from Groupe as g where g.parent.id = :parentId",
+                [parentId: groupe.id])
+
+        listeChildren.each {g ->
+            deleteGroupe(g)
+            //g.delete(flush: true, failOnError: true)
+        }
+
+        groupe.activites.each {a ->
+            a.groupes.remove(groupe)
+            a.save(flush: true, failOnError: true)
+        }
+
+        //deleteGroupe(groupe)
+
+        groupe.delete(flush: true, failOnError: true)
+    }
+
+    /*def deleteChildrenGroupes(Groupe groupe) {
+        def listeChildren = Groupe.findAll("from Groupe as g where g.parent.id = :parentId",
+                [parentId: groupe.id])
+
+        listeChildren.each {g ->
+            g.activites.each {a ->
+                a.groupes.remove(groupe)
+                a.save(flush: true, failOnError: true)
+            }
+
+            deleteChildrenGroupes(g)
+
+            groupe.delete(flush: true, failOnError: true)
+        }
+    }*/
+
     /*def buildListSubGroupes(Groupe groupe) {
         def liste = []
 

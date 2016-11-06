@@ -44,11 +44,11 @@ class GroupeController {
         if (!file.empty) {
             File fileDest = new File(grailsApplication.config.images.groupes.path, file.getOriginalFilename())
             file.transferTo(fileDest)
-        }
-        Photo photo = new Photo(nom:file.getOriginalFilename()).save(flush: true, failOnError: true)
 
-        groupeInstance.photo = photo
-        groupeInstance.validate()
+            Photo photo = new Photo(nom:file.getOriginalFilename()).save(flush: true, failOnError: true)
+            groupeInstance.photo = photo
+            groupeInstance.validate()
+        }
 
         if (groupeInstance == null) {
             notFound()
@@ -95,12 +95,11 @@ class GroupeController {
         if (!file.empty) {
             File fileDest = new File(grailsApplication.config.images.groupes.path, file.getOriginalFilename())
             file.transferTo(fileDest)
+
+            Photo photo = new Photo(nom:file.getOriginalFilename()).save(flush: true, failOnError: true)
+            groupeInstance.photo = photo
+            groupeInstance.validate()
         }
-        Photo photo = new Photo(nom:file.getOriginalFilename()).save(flush: true, failOnError: true)
-
-        groupeInstance.photo = photo
-        groupeInstance.validate()
-
 
         if (groupeInstance == null) {
             notFound()

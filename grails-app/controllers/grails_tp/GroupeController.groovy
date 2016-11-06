@@ -40,7 +40,7 @@ class GroupeController {
             groupeInstance.parent = parent
         }
 
-        /*def file = request.getFile('image')
+        def file = request.getFile('image')
         if (!file.empty) {
             File fileDest = new File(grailsApplication.config.images.groupes.path, file.getOriginalFilename())
             file.transferTo(fileDest)
@@ -48,7 +48,7 @@ class GroupeController {
         Photo photo = new Photo(nom:file.getOriginalFilename()).save(flush: true, failOnError: true)
 
         groupeInstance.photo = photo
-        groupeInstance.validate()*/
+        groupeInstance.validate()
 
         if (groupeInstance == null) {
             notFound()
@@ -90,7 +90,7 @@ class GroupeController {
 
         groupeService.updateActivitiesList(params.listeActivites)
 
-        /*def file = request.getFile('image')
+        def file = request.getFile('image')
         if (!file.empty) {
             File fileDest = new File(grailsApplication.config.images.groupes.path, file.getOriginalFilename())
             file.transferTo(fileDest)
@@ -98,7 +98,7 @@ class GroupeController {
         Photo photo = new Photo(nom:file.getOriginalFilename()).save(flush: true, failOnError: true)
 
         groupeInstance.photo = photo
-        groupeInstance.validate()*/
+        groupeInstance.validate()
 
 
         if (groupeInstance == null) {

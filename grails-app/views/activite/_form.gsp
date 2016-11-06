@@ -93,10 +93,9 @@
 
 <div class="fieldcontain ${hasErrors(bean: activiteInstance, field: 'photos', 'error')} ">
 	<div class="row">
-		<div class="col-md-3 col-md-offset-6">
-			<div class="crop" id="previewContainer"><span class="glyphicon glyphicon-camera"></span></div>
+		<div class="col-md-4 col-md-offset-4">
 			<div id="inputFileArea">
-				<span>Choisir une photo *</span>
+				<span>Choisir une ou plusieurs photo(s) *</span>
 			</div>
 		</div>
 	</div>

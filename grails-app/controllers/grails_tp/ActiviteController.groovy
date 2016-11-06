@@ -47,6 +47,19 @@ class ActiviteController {
         def listIds = params.groupList.split(',')
         def idsGroupes = []
 
+
+        List fileList = request.getFiles('image') // 'files' is the name of the input
+        def photoList = [];
+        fileList.each { file ->
+            if (!file.empty) {
+                File fileDest = new File(grailsApplication.config.images.activites.path, file.getOriginalFilename())
+                file.transferTo(fileDest)
+                Photo photo = new Photo(nom:file.getOriginalFilename().replaceAll("\\s","%20")).save(flush: true, failOnError: true)
+                activiteInstance.addToPhotos(photo)
+            }
+        }
+
+
         listIds.each { id ->
             if(id) {
                 idsGroupes.add(id.toInteger())

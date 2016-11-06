@@ -19,6 +19,7 @@
         input.setAttribute('type', 'file');
         input.setAttribute('name', 'image');
         input.setAttribute('id', 'photo');
+        input.setAttribute('multiple', 'multiple');
         input.style.display = 'none';
         input.addEventListener('change', function(e) {
             triggerCallback(e, callback);

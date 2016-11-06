@@ -27,10 +27,7 @@
 			<g:form url="[resource:userInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<div class="row">
-						<g:each in="${userInstance?.getAuthorities()}" var="role">
-							${role}
-						</g:each>
-						<span>${userInstance?.getAuthorities}</span>
+
 						<div class="col-md-2 col-md-offset-4">
 							<g:link class="edit-btn" action="edit" resource="${userInstance}">Editer</g:link>
 						</div>

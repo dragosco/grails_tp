@@ -30,7 +30,7 @@
 			<span class="label">Latitude *</span>
 		</div>
 		<div class="col-md-3">
-			<g:field class="form-control" id="lat" type="number" name="lat" value="${fieldValue(bean: activiteInstance, field: 'lat')}" required=""/>
+			<g:field class="form-control" id="lat" type="number" step="any" name="lat" value="${activiteInstance?.lat}" required=""/>
 		</div>
 	</div>
 </div>
@@ -41,7 +41,7 @@
 			<span class="label">Longitude *</span>
 		</div>
 		<div class="col-md-3">
-			<g:field class="form-control" id="lng" type="number" name="lng" value="${fieldValue(bean: activiteInstance, field: 'lng')}" required=""/>
+			<g:field class="form-control" id="lng" type="number" step="any" name="lng" value="${activiteInstance?.lng}" required=""/>
 		</div>
 	</div>
 </div>

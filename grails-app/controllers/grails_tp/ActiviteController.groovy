@@ -42,7 +42,8 @@ class ActiviteController {
     def save(Activite activiteInstance) {
         activiteInstance.auteur = springSecurityService.getCurrentUser()
         activiteInstance.groupes = []
-
+        activiteInstance.lat = Double.parseDouble(params.lat)
+        activiteInstance.lng = Double.parseDouble(params.lng)
         def listIds = params.groupList.split(',')
         def idsGroupes = []
 
@@ -100,6 +101,9 @@ class ActiviteController {
     def update(Activite activiteInstance) {
         activiteInstance.groupes = []
 
+        log.println(params.lat + "  " + params.lng)
+        activiteInstance.lat = Double.parseDouble(params.lat)
+        activiteInstance.lng = Double.parseDouble(params.lng)
         def listIds = params.groupList.split(',')
         def idsGroupes = []
         listIds.each {id ->

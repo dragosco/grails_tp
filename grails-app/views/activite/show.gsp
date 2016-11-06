@@ -17,17 +17,14 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-9">
-					<div id="map_activite_unique" style="width:100%; height:400px;"></div>
-					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL7CpoZYB65LA0bjOghxwIN98SaqXFwQA&callback=mapActivite"></script>
-				</div>
+
 				<div class="col-md-3">
 						${activiteInstance?.description}
 						<div id="nomActiviteDiv">
 							${activiteInstance?.nom}
 						</div>
-						<input class="latActivite" type="hidden" value="${activiteInstance?.lat}" />
-						<input class="lngActivite" type="hidden" value="${activiteInstance?.lng}" />
+						<input id="latActivite" type="hidden" value="${activiteInstance?.lat}" />
+						<input id="lngActivite" type="hidden" value="${activiteInstance?.lng}" />
 
 						${activiteInstance?.auteur.username}
 
@@ -39,6 +36,10 @@
 							</ul>
 
 						</g:each>
+				</div>
+				<div class="col-md-9">
+					<div id="map_activite_unique" style="width:100%; height:400px;"></div>
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL7CpoZYB65LA0bjOghxwIN98SaqXFwQA&callback=mapActivite"></script>
 				</div>
 			</div>
 

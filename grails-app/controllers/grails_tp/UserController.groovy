@@ -84,6 +84,9 @@ class UserController {
             notFound()
             return
         }
+        def currentUser = springSecurityService.getCurrentUser()
+
+        userInstance.password = params.newpassword
 
         if (userInstance.hasErrors()) {
             respond userInstance.errors, view:'edit'

@@ -29,6 +29,7 @@ $( document ).ready(function () {
 			$("#register_btn").prop("disabled",true);
 		} else {
 			$("#pass_not_equal_div").hide();
+			$("#register_btn").prop("disabled",false);
 		}
 	});
 	$("#confirm_pass").keyup(function() {
@@ -37,6 +38,7 @@ $( document ).ready(function () {
 			$("#register_btn").prop("disabled",true);
 		} else {
 			$("#pass_not_equal_div").hide();
+			$("#register_btn").prop("disabled",false);
 		}
 	});
 

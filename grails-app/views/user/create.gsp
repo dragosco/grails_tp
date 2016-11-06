@@ -52,7 +52,7 @@
 						<g:passwordField id="confirm_pass" type="password" class="form-control" placeholder="Réintroduisez votre mdp" name="ConfirmPassword" required=""/>
 				</div>
                 <div id="pass_not_equal_div" class="col-md-3">
-                    <span class="alert-danger">Les mots de pass ne correspondent pas</span>
+                    <span class="alert-danger">Les mots de passe ne correspondent pas</span>
                 </div>
 			</div>
 			<div class="row">

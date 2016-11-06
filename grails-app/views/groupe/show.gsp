@@ -21,7 +21,7 @@
 					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL7CpoZYB65LA0bjOghxwIN98SaqXFwQA&callback=mapGroupe"></script>
 				</div>
 				<div class="col-md-3">
-
+					<img style="width: 100%; height: auto;" src=${grailsApplication.config.images.groupes.url}${groupeInstance.photo?.nom}>
 					<g:if test="${groupeInstance?.activites}">
 						<ul>
 							<g:each in="${groupeInstance.activites}" var="a">

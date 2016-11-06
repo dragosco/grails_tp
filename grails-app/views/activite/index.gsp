@@ -19,7 +19,7 @@
 					<table class="table table-hover">
 			<thead>
 					<tr>
-					
+
 						<g:sortableColumn property="nom" title="${message(code: 'activite.nom.label', default: 'Nom')}" />
 					
 						<g:sortableColumn property="description" title="${message(code: 'activite.description.label', default: 'Description')}" />
@@ -29,13 +29,14 @@
 						<g:sortableColumn property="lng" title="${message(code: 'activite.lng.label', default: 'Lng')}" />
 					
 						<th><g:message code="activite.auteur.label" default="Auteur" /></th>
-					
+
+                        <th></th>
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${activiteInstanceList}" status="i" var="activiteInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
+
 						<td><g:link action="show" id="${activiteInstance.id}">${fieldValue(bean: activiteInstance, field: "nom")}</g:link></td>
 					
 						<td>${fieldValue(bean: activiteInstance, field: "description")}</td>
@@ -45,7 +46,14 @@
 						<td>${fieldValue(bean: activiteInstance, field: "lng")}</td>
 					
 						<td>${fieldValue(bean: activiteInstance, field: "auteur.username")}</td>
-					
+
+                        <td>
+                            <g:form url="[resource:activiteInstance, action:'delete']" method="DELETE" style="margin:0;">
+                            <g:link class="edit-btn fixed" action="edit" resource="${activiteInstance}"><g:message code="Editer" default="Edit" /></g:link>
+
+                                <g:actionSubmit class="delete-btn fixed" action="delete" value="Supprimer" onclick="return confirm('En êtes-vous certain ?');" />
+                            </g:form>
+                        </td>
 					</tr>
 				</g:each>
 				</tbody>

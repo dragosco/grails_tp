@@ -2,9 +2,9 @@ package grails_tp
 
 
 enum AuthorityEnum {
-    OP( 'op' ),
-    MOD( 'mod' ),
-    ADMIN( 'admin' )
+    OP( 'ROLE_OP' ),
+    MOD( 'ROLE_MOD' ),
+    ADMIN( 'ROLE_ADMIN' )
 
     private final String authority;
 

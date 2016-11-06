@@ -1,4 +1,5 @@
 <%@ page import="grails_tp.User" %>
+<%@ page import="grails_tp.Role" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,40 +12,79 @@
 			<g:form url="[resource:userInstance, action:'update']" method="PUT" >
 				<g:hiddenField name="version" value="${userInstance?.version}" />
 
+				<!-- si pas admin -->
 				<sec:ifNotGranted roles="ROLE_ADMIN">
-					<g:if test="${sec.username() == userInstance?.username}">
+					<!-- si modérateur -->
+					<sec:ifAllGranted roles="ROLE_MOD">
+						<g:if test="${sec.username() == userInstance?.username || userInstance?.isSameAuthority("ROLE_OP")}">
+							<div class="row">
+								<div class="page-header col-md-offset-3 col-md-6">
+									<span>MODE EDITION</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-2 col-md-offset-4">
+									<span class="label">Changer le pseudo</span>
+								</div>
+								<div class="col-md-2">
+									<g:textField class="form-control" name="username" required="" value="${userInstance?.username}"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-2 col-md-offset-4">
+									<span class="label">Changer le mot de passe</span>
+								</div>
+								<div class="col-md-2">
+									<g:passwordField id="pass" class="form-control" name="newpassword" placeholder="Nouveau" required="" value=""/>
+									<br>
+									<g:passwordField id="confirm_pass" class="form-control" name="newpasswordconfirm" placeholder="Confirmer" required="" value=""/>
+								</div>
 
-						<div class="row">
-							<div class="page-header col-md-offset-3 col-md-6">
-								<span>MODE EDITION</span>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-2 col-md-offset-4">
-								<span class="label">Changer votre pseudo</span>
+							<div id="pass_not_equal_div" class="row">
+								<div class="col-md-offset-4 ">
+									<span class="alert-danger">Les mots de passe ne correspondent pas</span>
+								</div>
 							</div>
-							<div class="col-md-2">
-								<g:textField class="form-control" name="username" required="" value="${userInstance?.username}"/>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-2 col-md-offset-4">
-								<span class="label">Changer votre mot de passe</span>
-							</div>
-							<div class="col-md-2">
-								<g:passwordField id="pass" class="form-control" name="newpassword" placeholder="Nouveau" required="" value=""/>
-								<br>
-								<g:passwordField id="confirm_pass" class="form-control" name="newpasswordconfirm" placeholder="Confirmer" required="" value=""/>
-							</div>
+						</g:if>
+					</sec:ifAllGranted>
+					<!-- si pas modérateur -->
+					<sec:ifNotGranted roles="ROLE_MOD">
+						<g:if test="${sec.username() == userInstance?.username}">
 
-						</div>
-						<div id="pass_not_equal_div" class="row">
-							<div class="col-md-offset-4 ">
-								<span class="alert-danger">Les mots de passe ne correspondent pas</span>
+							<div class="row">
+								<div class="page-header col-md-offset-3 col-md-6">
+									<span>MODE EDITION</span>
+								</div>
 							</div>
-						</div>
-					</g:if>
+							<div class="row">
+								<div class="col-md-2 col-md-offset-4">
+									<span class="label">Changer votre pseudo</span>
+								</div>
+								<div class="col-md-2">
+									<g:textField class="form-control" name="username" required="" value="${userInstance?.username}"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-2 col-md-offset-4">
+									<span class="label">Changer votre mot de passe</span>
+								</div>
+								<div class="col-md-2">
+									<g:passwordField id="pass" class="form-control" name="newpassword" placeholder="Nouveau" required="" value=""/>
+									<br>
+									<g:passwordField id="confirm_pass" class="form-control" name="newpasswordconfirm" placeholder="Confirmer" required="" value=""/>
+								</div>
+
+							</div>
+							<div id="pass_not_equal_div" class="row">
+								<div class="col-md-offset-4 ">
+									<span class="alert-danger">Les mots de passe ne correspondent pas</span>
+								</div>
+							</div>
+						</g:if>
+					</sec:ifNotGranted>
 				</sec:ifNotGranted>
+				<!-- si admin -->
 				<sec:ifAllGranted roles='ROLE_ADMIN'>
 
 					<div class="row">
@@ -61,7 +101,16 @@
 						</div>
 					</div>
 
-
+					<div class="row">
+						<div class="col-md-2 col-md-offset-4">
+							<span class="label">Niveau d'accès</span>
+						</div>
+						<div class="col-md-2">
+							<g:select class="form-control" name="authority"
+									  from="${Role.list().authority}"
+									  value="${userInstance?.authorities.getAt(0).authority}" />
+						</div>
+					</div>
 
 					<div class="row">
 						<div class="col-md-2 col-md-offset-4">

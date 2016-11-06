@@ -6,8 +6,9 @@ refreshActivityList = function () {
     var activitesParGroupes = '';
 
     $(".groupeElement").each(function (index, element) {
-        var lis = element.getElementsByClassName("activiteElement");
-        //if(lis.length > 0) {
+        if(element.id) {
+            var lis = element.getElementsByClassName("activiteElement");
+
             activitesParGroupes += element.id + ':';
 
             for (var i = 0; i < lis.length; i++) {
@@ -18,7 +19,7 @@ refreshActivityList = function () {
                 }
             }
             activitesParGroupes += ';';
-        //}
+        }
     });
 
     //alert(activitesParGroupes);

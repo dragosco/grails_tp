@@ -40,16 +40,27 @@
 
 <g:if test="${groupeInstance.id != null}">
 	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
+		<div class="col-md-4 col-md-offset-2">
+			Nouvelles activités. Cliquez et déposez pour les ajouter à la liste du groupe :
+			<ol class="default vertical groupeElement">
+				<g:if test="${nouvellesAtivites != null && !nouvellesAtivites.isEmpty()}">
+					<g:each in="${nouvellesAtivites}" var="activite">
+						<li id="${activite.id}" class="activiteElement"><g:link controller="activite" action="show" id="${activite.id}">${activite.nom}</g:link></li>
+					</g:each>
+				</g:if>
+			</ol>
+		</div>
+
+		<div class="col-md-4">
 			<g:hiddenField id="listeActivites" name="listeActivites" value="21:3,5,4,6" />
 			Changer l'ordre de l'affichage des activités :
-			<!--<g:if test="${groupeInstance.activites != null && !groupeInstance.activites.isEmpty()}">-->
-				<ol id="${groupeInstance.id}" class="default vertical groupeElement">
+			<ol id="${groupeInstance.id}" class="default vertical groupeElement">
+				<g:if test="${groupeInstance.activites != null && !groupeInstance.activites.isEmpty()}">
 					<g:each in="${groupeInstance.activites}" var="a">
 						<li id="${a.id}" class="activiteElement"><g:link controller="activite" action="show" id="${a.id}">${a.nom}</g:link></li>
 					</g:each>
-				</ol>
-			<!--</g:if>-->
+				</g:if>
+			</ol>
 
 			<g:if test="${listSubGroupes != null && !listSubGroupes.isEmpty()}">
 				<ol>

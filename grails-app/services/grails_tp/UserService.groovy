@@ -9,16 +9,40 @@ class UserService {
 
     def createUser (String username, String password, Role role) {
         def user = new User(username: username, password: password).save(flush: true, failOnError: true)
-        UserRole.create(user, role)
+        UserRole.create(user, role, true)
 
         return user
     }
 
-    def grantRole (long userId, long newRoleId) {
-        def user = User.get(userId)
-        def newRole = Role.get(newRoleId)
+    def changeAutority (User user, String oldRoleName, String newRoleName) {
+        def oldRole = Role.findByAuthority(oldRoleName)
+        def newRole = Role.findByAuthority(newRoleName)
+        UserRole.remove(user, oldRole)
+        UserRole.create(user, newRole, true)
+    }
 
-        def userRole = new UserRole(user, newRole)
-        userRole.save(flush: true, failOnError: true)
+    def deleteUser(User user) {
+        UserRole.removeAll(user, true)
+
+        def activites = Activite.findAllByAuteur(user)
+        activites.each { a ->
+            a.auteur = null
+            a.save(flush: true, failOnError: true)
+        }
+
+        def groupes = Groupe.findAllByAuteur(user)
+        groupes.each { g ->
+            g.auteur = null
+            g.save(flush: true, failOnError: true)
+        }
+
+        user.delete(flush: true, failOnError: true)
+    }
+
+    def grantRole (User user, Role newRole) {
+        UserRole.create(user, newRole, true)
+
+        /*def userRole = new UserRole(user, newRole)
+        userRole.save(flush: true, failOnError: true)*/
     }
 }

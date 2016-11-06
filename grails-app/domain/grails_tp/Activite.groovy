@@ -17,6 +17,7 @@ class Activite {
         description     nullable: true
         lat             nullable: false
         lng             nullable: false
+        auteur          nullable: true
     }
 
     static mapping = {

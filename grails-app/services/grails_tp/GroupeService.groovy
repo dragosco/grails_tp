@@ -30,18 +30,68 @@ class GroupeService {
         return listeSuperGroupes
     }
 
-    def listSubGroupes(Groupe groupe, int level) {
+    def listSubGroupsWithLevel(Groupe groupe, int level) {
         def map = [:]
 
         groupe.groupes.each {subGroupe ->
             //map.put(subGroupe, new Tuple(subGroupe, level))
             map.put(subGroupe, level)
             if(!subGroupe.groupes.empty) {
-                map.putAll(listSubGroupes(subGroupe, level + 1))
+                map.putAll(listSubGroupsWithLevel(subGroupe, level + 1))
             }
         }
 
         return map
+    }
+
+    def listSubGroups(Groupe groupe) {
+        def list = []
+
+        groupe.groupes.each {subGroupe ->
+            list.add(subGroupe)
+            if(!subGroupe.groupes.empty) {
+                list.addAll(listSubGroups(subGroupe))
+            }
+        }
+
+        return list
+    }
+
+    def findSuperGroupForSubGroup(Groupe groupe) {
+        if(groupe.isSuperGroupe()) {
+            return groupe
+        }
+        findSuperGroupForSubGroup(groupe.parent)
+    }
+
+    def getNewActivities(Groupe groupe, Map subGroups) {
+        def allActivites = Activite.list()
+
+        if(groupe.isSuperGroupe()) {
+            // retire toutes les activités déjà presentes dans le groupe
+            groupe.activites.each { a ->
+                allActivites.remove(a)
+            }
+
+            // retire toutes les activités déjà presentes dans un des sous-groupes du groupe
+            subGroups.each { g ->
+                g.getKey().activites.each { a ->
+                    allActivites.remove(a)
+                }
+            }
+        } else {
+            def superGroupe = findSuperGroupForSubGroup(groupe)
+            def listSubGroups = listSubGroups(superGroupe)
+
+            // retire toutes les activités déjà presentes dans n'importe quel sous-groupe du super groupe auquel le groupe en edition appartient
+            listSubGroups.each { g ->
+                g.activites.each { a ->
+                    allActivites.remove(a)
+                }
+            }
+        }
+
+        return allActivites
     }
 
     def updateActivitiesList(String listeActivites) {

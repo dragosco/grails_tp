@@ -1,3 +1,4 @@
+<%@ page import="grails_tp.Role" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -55,6 +56,19 @@
                     <span class="alert-danger">Les mots de passe ne correspondent pas</span>
                 </div>
 			</div>
+			<sec:ifAllGranted roles='ROLE_ADMIN'>
+				<div class="row">
+					<div class="col-md-offset-3 col-md-3">
+						<span class="label">Niveau d'accès</span>
+					</div>
+
+					<div class="col-md-3">
+						<g:select class="form-control" name="authority"
+								  from="${Role.list().authority}"
+								  value="" />
+					</div>
+				</div>
+			</sec:ifAllGranted>
 			<div class="row">
 				<div class="col-md-offset-6 col-md-3">
 					<g:submitButton id="register_btn" name="create" class="save" value="Valider" />

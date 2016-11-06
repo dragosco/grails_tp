@@ -24,19 +24,24 @@
 			</g:if>
 		</div>
 	</div>
+		<div>
 			<g:form url="[resource:userInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<div class="row">
-
-						<div class="col-md-2 col-md-offset-4">
-							<g:link class="edit-btn" action="edit" resource="${userInstance}">Editer</g:link>
-						</div>
-						<div class="col-md-2">
-							<g:actionSubmit class="delete-btn" action="delete" value="Supprimer" onclick="return confirm('En êtes-vous certain ?');" />
-						</div>
+						<sec:ifAllGranted roles='ROLE_ADMIN'>
+							<div class="col-md-2 col-md-offset-4">
+								<g:link class="edit-btn" action="edit" resource="${userInstance}">Editer</g:link>
+							</div>
+							<div class="col-md-2">
+								<g:actionSubmit class="delete-btn" action="delete" value="Supprimer" onclick="return confirm('En êtes-vous certain ?');" />
+							</div>
+						</sec:ifAllGranted>
+						<sec:ifNotGranted roles="ROLE_ADMIN">
+							<div class="col-md-4 col-md-offset-4">
+								<g:link class="edit-btn" action="edit" resource="${userInstance}">Editer</g:link>
+							</div>
+						</sec:ifNotGranted>
 					</div>
-
-
 				</fieldset>
 			</g:form>
 		</div>

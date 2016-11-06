@@ -10,6 +10,7 @@ class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
     SpringSecurityService springSecurityService
+    def userService
 
     @Secured('IS_AUTHENTICATED_FULLY')
     def index(Integer max) {
@@ -21,13 +22,11 @@ class UserController {
         if(roleCurrentUser.authority.equals("ROLE_ADMIN")) {
             respond User.list(params), model:[userInstanceCount: User.count()]
         } else {
-            //def users = User.findAll("from User as u where u. = :mod" [mod: AuthorityEnum.MOD])
             def usersTemp = User.list(params)
             def users = []
 
             usersTemp.each {u ->
-                println(u.username)
-                if(u.authorities.getAt(0).authority.equals("ROLE_OP") || (u.authorities.getAt(0).authority.equals("ROLE_MOD") && u.id == currentUser.id))
+                if(u.isSameAuthority("ROLE_OP") || (u.isSameAuthority("ROLE_MOD") && u.id == currentUser.id))
                 {
                     users.push(u)
                 }
@@ -35,7 +34,6 @@ class UserController {
 
             respond users, model:[userInstanceCount: users.size()]
         }
-        //SecurityContextHolderAwareRequestWrapper.isUserInRole(AuthorityEnum.MOD)
 
     }
 
@@ -43,11 +41,13 @@ class UserController {
     def show(User userInstance) {
         respond userInstance
     }
+
     @Secured('permitAll')
     def create() {
         //redirect(controller: "index", action: "list")
         respond new User(params)
     }
+
     @Secured('permitAll')
     @Transactional
     def save(User userInstance) {
@@ -60,6 +60,14 @@ class UserController {
             respond userInstance.errors, view:'create'
             return
         }
+
+        def role = Role.get(3)
+
+        if(params.authority && !params.authority.equals("ROLE_OP")) {
+            role = Role.findByAuthority(params.authority)
+        }
+
+        userInstance = userService.createUser(userInstance.username, userInstance.password, role)
 
         userInstance.save flush:true
 
@@ -84,8 +92,6 @@ class UserController {
             notFound()
             return
         }
-        def currentUser = springSecurityService.getCurrentUser()
-
         userInstance.password = params.newpassword
 
         if (userInstance.hasErrors()) {
@@ -94,6 +100,18 @@ class UserController {
         }
 
         userInstance.save flush:true
+
+        def currentUser = springSecurityService.getCurrentUser()
+
+        //def oldRoleName = userInstance.authorities.getAt(0).authority
+        if(params.authority && !userInstance.isSameAuthority(params.authority)) {
+            userService.changeAutority(userInstance, oldRoleName, params.authority)
+            /*def userRole = userService.grantRole(userInstance, newRole)
+            if(userRole)
+            {
+                println("role criado")
+            }*/
+        }
 
         request.withFormat {
             form multipartForm {
@@ -112,7 +130,9 @@ class UserController {
             return
         }
 
-        userInstance.delete flush:true
+        userService.deleteUser(userInstance)
+
+        //userInstance.delete flush:true
 
         request.withFormat {
             form multipartForm {

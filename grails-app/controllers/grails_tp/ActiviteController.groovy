@@ -31,7 +31,7 @@ class ActiviteController {
         def listSuperGroupes = groupeService.listSuperGroupes()
         def listGroupeHierarchy = [:]
         listSuperGroupes.each { superGroupe ->
-            listGroupeHierarchy.put(superGroupe, groupeService.listSubGroupes(superGroupe, 0))
+            listGroupeHierarchy.put(superGroupe, groupeService.listSubGroupsWithLevel(superGroupe, 0))
         }
         respond new Activite(params), model:[listSuperGroupes:listSuperGroupes, listGroupeHierarchy:listGroupeHierarchy]
     }
@@ -94,7 +94,7 @@ class ActiviteController {
         def listSuperGroupes = groupeService.listSuperGroupes()
         def listGroupeHierarchy = [:]
         listSuperGroupes.each {superGroupe ->
-            listGroupeHierarchy.put(superGroupe, groupeService.listSubGroupes(superGroupe, 0))
+            listGroupeHierarchy.put(superGroupe, groupeService.listSubGroupsWithLevel(superGroupe, 0))
         }
         def listIdGroupes = []
         activiteInstance.groupes.each {g ->

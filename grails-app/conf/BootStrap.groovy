@@ -12,13 +12,17 @@ class BootStrap {
     ActiviteService     activiteService
 
     def init = { servletContext ->
-        User op, mod, admin, modop
+        User op, op2, op3, op4, op5, mod, admin, modop
         try {
             def roleAdmin = new Role(authority: 'ROLE_ADMIN' ).save(flush: true, failOnError: true)
             def roleMod = new Role(authority: 'ROLE_MOD' ).save(flush: true, failOnError: true)
             def roleOp = new Role(authority: 'ROLE_OP' ).save(flush: true, failOnError: true)
 
             op = userService.createUser("thais", "123456", roleOp)
+            op2 = userService.createUser("op2", "op2", roleOp)
+            op3 = userService.createUser("op3", "op3", roleOp)
+            op4 = userService.createUser("op4", "op4", roleOp)
+            op5 = userService.createUser("op5", "op5", roleOp)
             mod = userService.createUser("dragos", "000000", roleMod)
             admin = userService.createUser("admin", "admin", roleAdmin)
             modop = userService.createUser("modop", "modop", roleOp)
@@ -67,79 +71,91 @@ class BootStrap {
             def ville        = groupeService.createGroupe("Ville", admin, 7, 1)
 
             def list = []
-            list.add(Integer.valueOf(8))
-            list.add(Integer.valueOf(10))
-            list.add(Integer.valueOf(15))
+            list.add(Integer.valueOf(6))
+            list.add(Integer.valueOf(9))
+            list.add(Integer.valueOf(12))
+            list.add(Integer.valueOf(16))
             def activite1 = activiteService.createActivite("activité1", "bla bl bla bla", 43.725211668016534, 7.306079864501953, op, list)
             println(activite1);
             list = []
             list.add(Integer.valueOf(7))
             list.add(Integer.valueOf(10))
-            list.add(Integer.valueOf(15))
-            def activite2 = activiteService.createActivite("activité2", "bla bl bla bla", 43.72024932899604, 7.328739166259766, op, list)
+            list.add(Integer.valueOf(13))
+            list.add(Integer.valueOf(17))
+            def activite2 = activiteService.createActivite("activité2", "bla bl bla bla", 43.72024932899604, 7.328739166259766, op2, list)
             println(activite2);
             list = []
-            list.add(Integer.valueOf(21))
-            list.add(Integer.valueOf(10))
-            list.add(Integer.valueOf(15))
-            def activite3 = activiteService.createActivite("activité3", "bla bl bla bla", 43.74431283565998, 7.211666107177734, op, list)
+            list.add(Integer.valueOf(8))
+            list.add(Integer.valueOf(11))
+            list.add(Integer.valueOf(14))
+            list.add(Integer.valueOf(18))
+            def activite3 = activiteService.createActivite("activité3", "bla bl bla bla", 43.74431283565998, 7.211666107177734, op3, list)
             println(activite3);
             list = []
             list.add(Integer.valueOf(21))
-            list.add(Integer.valueOf(10))
+            list.add(Integer.valueOf(9))
             list.add(Integer.valueOf(15))
-            def activite4 = activiteService.createActivite("activité4", "bla bl bla bla", 43.676811329698296, 7.176990509033203, op, list)
+            list.add(Integer.valueOf(19))
+            def activite4 = activiteService.createActivite("activité4", "bla bl bla bla", 43.676811329698296, 7.176990509033203, op4, list)
             println(activite4);
             list = []
             list.add(Integer.valueOf(21))
             list.add(Integer.valueOf(10))
-            list.add(Integer.valueOf(15))
-            def activite5 = activiteService.createActivite("activité5", "bla bl bla bla", 43.67879775320724, 7.335605621337891, op, list)
+            list.add(Integer.valueOf(12))
+            list.add(Integer.valueOf(20))
+            def activite5 = activiteService.createActivite("activité5", "bla bl bla bla", 43.67879775320724, 7.335605621337891, op5, list)
             println(activite5);
             list = []
-            list.add(Integer.valueOf(21))
-            list.add(Integer.valueOf(10))
-            list.add(Integer.valueOf(15))
-            def activite6 = activiteService.createActivite("activité6", "bla bl bla bla", 43.76117633310127, 7.406330108642578, op, list)
+            list.add(Integer.valueOf(22))
+            list.add(Integer.valueOf(11))
+            list.add(Integer.valueOf(13))
+            list.add(Integer.valueOf(16))
+            def activite6 = activiteService.createActivite("activité6", "bla bl bla bla", 43.76117633310127, 7.406330108642578, mod, list)
             println(activite6);
             list = []
-            list.add(Integer.valueOf(21))
-            list.add(Integer.valueOf(10))
-            list.add(Integer.valueOf(15))
-            def activite7 = activiteService.createActivite("activité7", "bla bl bla bla", 43.76117633310127, 7.406330108642578, op, list)
+            list.add(Integer.valueOf(24))
+            list.add(Integer.valueOf(9))
+            list.add(Integer.valueOf(14))
+            list.add(Integer.valueOf(17))
+            def activite7 = activiteService.createActivite("activité7", "bla bl bla bla", 43.714294, 7.250805, op, list)
             println(activite7);
             list = []
-            list.add(Integer.valueOf(21))
-            list.add(Integer.valueOf(9))
+            list.add(Integer.valueOf(23))
+            list.add(Integer.valueOf(10))
             list.add(Integer.valueOf(15))
-            def activite8 = activiteService.createActivite("activité8", "bla bl bla bla", 43.76117633310127, 7.406330108642578, op, list)
+            list.add(Integer.valueOf(18))
+            def activite8 = activiteService.createActivite("activité8", "bla bl bla bla", 43.716031, 7.262564, op2, list)
             println(activite8);
             list = []
-            list.add(Integer.valueOf(21))
-            list.add(Integer.valueOf(9))
-            list.add(Integer.valueOf(15))
-            def activite9 = activiteService.createActivite("activité9", "bla bl bla bla", 43.76117633310127, 7.406330108642578, op, list)
+            list.add(Integer.valueOf(25))
+            list.add(Integer.valueOf(11))
+            list.add(Integer.valueOf(12))
+            list.add(Integer.valueOf(19))
+            def activite9 = activiteService.createActivite("activité9", "bla bl bla bla", 43.703374, 7.227802, op3, list)
             println(activite9);
             list = []
-            list.add(Integer.valueOf(21))
+            list.add(Integer.valueOf(26))
             list.add(Integer.valueOf(9))
-            list.add(Integer.valueOf(15))
-            def activite10 = activiteService.createActivite("activité10", "bla bl bla bla", 43.76117633310127, 7.406330108642578, op, list)
+            list.add(Integer.valueOf(13))
+            list.add(Integer.valueOf(20))
+            def activite10 = activiteService.createActivite("activité10", "bla bl bla bla", 43.718512, 7.329082, op4, list)
             println(activite10);
             list = []
-            list.add(Integer.valueOf(21))
-            list.add(Integer.valueOf(9))
-            list.add(Integer.valueOf(15))
-            def activite11 = activiteService.createActivite("activité11", "bla bl bla bla", 43.76117633310127, 7.406330108642578, op, list)
+            list.add(Integer.valueOf(7))
+            list.add(Integer.valueOf(10))
+            list.add(Integer.valueOf(14))
+            list.add(Integer.valueOf(16))
+            def activite11 = activiteService.createActivite("activité11", "bla bl bla bla", 43.725956, 7.398090, op5, list)
             println(activite11);
             list = []
-            list.add(Integer.valueOf(21))
-            list.add(Integer.valueOf(9))
+            list.add(Integer.valueOf(8))
+            list.add(Integer.valueOf(11))
             list.add(Integer.valueOf(15))
-            def activite12 = activiteService.createActivite("activité12", "bla bl bla bla", 43.76117633310127, 7.406330108642578, op, list)
+            list.add(Integer.valueOf(17))
+            def activite12 = activiteService.createActivite("activité12", "bla bl bla bla", 44.078707, 7.255440, mod, list)
             println(activite12);
 
-            userService.grantRole(modop.id, roleMod.id)
+            //userService.grantRole(modop.id, roleMod.id)
         } catch(e) {
             println e
         }

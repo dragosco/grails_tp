@@ -18,11 +18,13 @@
 				</div>
 
 			</div>
-			<div class="row">
-				<div class="col-md-4 col-md-offset-4 text-center">
-					<g:link action="create" resource="${userInstance}"><span class="glyphicon glyphicon-plus"></span>Ajouter un utilisateur</g:link>
+			<sec:ifAllGranted roles='ROLE_ADMIN'>
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4 text-center">
+						<g:link action="create" resource="${userInstance}"><span class="glyphicon glyphicon-plus"></span> Ajouter un utilisateur</g:link>
+					</div>
 				</div>
-			</div>
+			</sec:ifAllGranted>
 			<div class="row">
 				<div class="col-md-12">
 					<table class="table table-hover">
@@ -57,10 +59,12 @@
 								<td><g:formatBoolean boolean="${userInstance.passwordExpired}" /></td>
 
 								<td>
-									<g:form url="[resource:userInstance, action:'delete']" method="DELETE" style="margin:0;">
-										<g:link class="edit-btn fixed" action="edit" resource="${userInstance}">Editer</g:link>
-										<g:actionSubmit class="delete-btn fixed" action="delete" value="Supprimer" onclick="return confirm('En êtes-vous certain ?');" />
-									</g:form>
+									<g:link class="edit-btn fixed" action="edit" resource="${userInstance}">Editer</g:link>
+									<sec:ifAllGranted roles='ROLE_ADMIN'>
+										<g:form url="[resource:userInstance, action:'delete']" method="DELETE" style="margin:0;">
+											<g:actionSubmit class="delete-btn fixed" action="delete" value="Supprimer" onclick="return confirm('En êtes-vous certain ?');" />
+										</g:form>
+									</sec:ifAllGranted>
 								</td>
 							</tr>
 						</g:each>

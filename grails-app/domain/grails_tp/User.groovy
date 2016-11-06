@@ -28,6 +28,10 @@ class User implements Serializable {
 		UserRole.findAllByUser(this)*.role
 	}
 
+	def isSameAuthority(String authority) {
+		return authorities.getAt(0).authority.equals(authority)
+	}
+
 	def beforeInsert() {
 		encodePassword()
 	}

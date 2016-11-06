@@ -20,7 +20,7 @@ class GroupeController {
 
     @Secured('IS_AUTHENTICATED_FULLY')
     def show(Groupe groupeInstance) {
-        def listSubGroupes = groupeService.listSubGroupes(groupeInstance, 0)
+        def listSubGroupes = groupeService.listSubGroupsWithLevel(groupeInstance, 0)
         render (view: "/groupe/show", model: [listSubGroupes:listSubGroupes, groupeInstance: groupeInstance])
     }
 
@@ -73,8 +73,9 @@ class GroupeController {
 
     @Secured(['ROLE_ADMIN', 'ROLE_MOD'])
     def edit(Groupe groupeInstance) {
-        def listSubGroupes = groupeService.listSubGroupes(groupeInstance, 0)
-        respond groupeInstance, model:[listSubGroupes:listSubGroupes]
+        def listSubGroupes = groupeService.listSubGroupsWithLevel(groupeInstance, 0)
+        def nouvellesAtivites = groupeService.getNewActivities(groupeInstance, listSubGroupes)
+        respond groupeInstance, model:[listSubGroupes:listSubGroupes, nouvellesAtivites:nouvellesAtivites]
         //respond groupeInstance
     }
 

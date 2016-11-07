@@ -23,9 +23,9 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form url="[resource:activiteInstance, action:'update']" method="PUT" >
+			<g:form url="[resource:activiteInstance, action:'update']" method="PUT"><!--enctype="multipart/form-data"-->
 				<g:hiddenField name="version" value="${activiteInstance?.version}" />
-				<fieldset class="form">
+				<fieldset class="form" >
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">

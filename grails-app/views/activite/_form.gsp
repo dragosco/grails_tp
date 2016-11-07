@@ -97,6 +97,7 @@
 			<div id="inputFileArea">
 				<span>Choisir une ou plusieurs photo(s) *</span>
 			</div>
+			<p id="messageInputFile"></p>
 		</div>
 	</div>
 </div>

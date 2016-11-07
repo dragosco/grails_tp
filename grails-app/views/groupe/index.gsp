@@ -32,25 +32,27 @@
 						</thead>
 						<tbody>
 						<g:each in="${groupeInstanceList}" status="i" var="groupeInstance">
-							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+							<g:if test="${groupeInstance?.nom != "Aucun"}">
+								<tr>
 
-								<td>
-									<img style="width: 120px; height: auto;" src=${grailsApplication.config.images.groupes.url}${groupeInstance.photo?.nom}>
-								</td>
-								<td><g:link action="show" id="${groupeInstance.id}">${fieldValue(bean: groupeInstance, field: "nom")}</g:link></td>
+									<td>
+										<img style="width: 120px; height: auto;" src=${grailsApplication.config.images.groupes.url}${groupeInstance.photo?.nom}>
+									</td>
+									<td><g:link action="show" id="${groupeInstance.id}">${fieldValue(bean: groupeInstance, field: "nom")}</g:link></td>
 
-								<td>${fieldValue(bean: groupeInstance, field: "auteur.username")}</td>
+									<td>${fieldValue(bean: groupeInstance, field: "auteur.username")}</td>
 
-								<td>${fieldValue(bean: groupeInstance, field: "parent.nom")}</td>
+									<td>${fieldValue(bean: groupeInstance, field: "parent.nom")}</td>
 
-								<td>
-									<g:form url="[resource:groupeInstance, action:'delete']" method="DELETE" style="margin:0;">
-										<g:link class="edit-btn fixed" action="edit" resource="${groupeInstance}"><g:message code="Editer" default="Edit" /></g:link>
+									<td>
+										<g:form url="[resource:groupeInstance, action:'delete']" method="DELETE" style="margin:0;">
+											<g:link class="edit-btn fixed" action="edit" resource="${groupeInstance}"><g:message code="Editer" default="Edit" /></g:link>
 
-										<g:actionSubmit class="delete-btn fixed" action="delete" value="Supprimer" onclick="return confirm('En êtes-vous certain ?');" />
-									</g:form>
-								</td>
-							</tr>
+											<g:actionSubmit class="delete-btn fixed" action="delete" value="Supprimer" onclick="return confirm('En êtes-vous certain ?');" />
+										</g:form>
+									</td>
+								</tr>
+							</g:if>
 						</g:each>
 						</tbody>
 					</table>

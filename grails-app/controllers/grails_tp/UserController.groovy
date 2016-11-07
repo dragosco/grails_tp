@@ -101,9 +101,9 @@ class UserController {
 
         userInstance.save flush:true
 
-        def currentUser = springSecurityService.getCurrentUser()
+        //def currentUser = springSecurityService.getCurrentUser()
 
-        //def oldRoleName = userInstance.authorities.getAt(0).authority
+        def oldRoleName = userInstance.authorities.getAt(0).authority
         if(params.authority && !userInstance.isSameAuthority(params.authority)) {
             userService.changeAutority(userInstance, oldRoleName, params.authority)
             /*def userRole = userService.grantRole(userInstance, newRole)

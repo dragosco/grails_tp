@@ -43,9 +43,10 @@ class GroupeController {
         def file = request.getFile('image')
         if (!file.empty) {
             File fileDest = new File(grailsApplication.config.images.groupes.path, file.getOriginalFilename())
+
             file.transferTo(fileDest)
 
-            Photo photo = new Photo(nom:file.getOriginalFilename()).save(flush: true, failOnError: true)
+            Photo photo = new Photo(nom:file.getOriginalFilename().replaceAll("\\s","%20")).save(flush: true, failOnError: true)
             groupeInstance.photo = photo
             groupeInstance.validate()
         }
@@ -73,9 +74,11 @@ class GroupeController {
 
     @Secured(['ROLE_ADMIN', 'ROLE_MOD'])
     def edit(Groupe groupeInstance) {
+        def listeParentsPossibles = Groupe.list()
+        listeParentsPossibles.remove(groupeInstance)
         def listSubGroupes = groupeService.listSubGroupsWithLevel(groupeInstance, 0)
         def nouvellesAtivites = groupeService.getNewActivities(groupeInstance, listSubGroupes)
-        respond groupeInstance, model:[listSubGroupes:listSubGroupes, nouvellesAtivites:nouvellesAtivites]
+        respond groupeInstance, model:[listeParentsPossibles: listeParentsPossibles, listSubGroupes:listSubGroupes, nouvellesAtivites:nouvellesAtivites]
         //respond groupeInstance
     }
 
@@ -85,8 +88,10 @@ class GroupeController {
         groupeInstance.auteur = springSecurityService.getCurrentUser()
 
         def parent = Groupe.get(params.parent.id)
-        if (parent) {
+        if (parent && groupeInstance.id != parent.id) {
             groupeInstance.parent = parent
+        } else {
+            groupeInstance.parent = groupeInstance.parent
         }
 
         groupeService.updateActivitiesList(params.listeActivites)

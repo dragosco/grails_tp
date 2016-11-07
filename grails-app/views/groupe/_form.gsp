@@ -3,7 +3,14 @@
 
 <div class="row">
 	<div class="col-md-4 col-md-offset-4">
-		<div class="crop" id="previewContainer"><span class="glyphicon glyphicon-camera"></span></div>
+		<div class="crop" id="previewContainer">
+			<g:if test="${actionName == 'edit'}">
+				<img id="previewImage" src=${grailsApplication.config.images.groupes.url}${groupeInstance.photo?.nom} />
+			</g:if>
+			<g:if test="${actionName != 'edit'}">
+				<span class="glyphicon glyphicon-camera"></span>
+			</g:if>
+		</div>
 		<div id="inputFileArea">
 			<span>Choisir une photo *</span>
 		</div>
@@ -32,7 +39,12 @@
 				<g:message code="groupe.parent.label" default="Parent" />
 				<span class="required-indicator">*</span>
 			</label>
-			<g:select class="many-to-one form-control"  id="parent" name="parent.id" from="${groupeInstance.list()}" optionKey="id" required="" value="${groupeInstance?.parent?.id}" optionValue="nom"/>
+			<g:if test="${actioName == "edit"}">
+				<g:select class="many-to-one form-control"  id="parent" name="parent.id" from="${listeParentsPossibles}" optionKey="id" required="" value="${groupeInstance?.parent?.id}" optionValue="nom"/>
+			</g:if>
+			<g:if test="${actioName != "edit"}">
+				<g:select class="many-to-one form-control"  id="parent" name="parent.id" from="${groupeInstance.list()}" optionKey="id" required="" value="${groupeInstance?.parent?.id}" optionValue="nom"/>
+			</g:if>
 
 		</div>
 	</div>

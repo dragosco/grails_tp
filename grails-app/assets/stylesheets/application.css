@@ -335,3 +335,10 @@ form {
     text-decoration: none;
     color: #3e8f3e;
 }
+
+.carousel-control.right, .carousel-control.left {
+    background-image: none;
+}
+.carousel-control {
+    color :#2e3741;
+}

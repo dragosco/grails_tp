@@ -56,5 +56,6 @@ function readURL(input) {
 
 $("#photo").change(function(){
     readURL(this);
+    $("#messageInputFile").text(this.files.length + " photos ajoutés");
 });
 
